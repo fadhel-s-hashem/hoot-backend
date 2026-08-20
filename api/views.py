@@ -135,7 +135,7 @@ def comment_create(request, hoot_id):
 
 @api_view(["PUT", "DELETE"])
 def comment_detail(request, hoot_id, comment_id):
-    comment = get_object_or_404(comment, pk=comment_id, hoot_id=hoot_id)
+    comment = get_object_or_404(Comment, pk=comment_id, hoot_id=hoot_id)
 
     # check if it same user 
     if comment.author != request.user:
@@ -152,6 +152,10 @@ def comment_detail(request, hoot_id, comment_id):
             return Response(serializer.data)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    deleted_id = str(comment.id)
+    comment.delete()
+    return Response({"message": "Comment deleted.", "_id": deleted_id})
 
 
 

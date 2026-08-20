@@ -9,6 +9,5 @@ urlpatterns = [
     path('hoots', views.hoot_list_create, name="hoot-list-create"),
     path('hoots/<int:hoot_id>', views.hoot_detail, name="hoot-detail"),
     path('hoots/<int:hoot_id>/comments', views.comment_create, name="comment-create",),
-    # path('hoots/<int:hoot_id>/comments/<int:comment_id>', views.comment_detail, name="comment-detail",),
-
+    path('hoots/<int:hoot_id>/comments/<int:comment_id>', views.comment_detail, name="comment-detail",),
 ]
