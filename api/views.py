@@ -93,8 +93,14 @@ def hoot_list_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view("GET", "PUT", "DELETE")
+@api_view(["GET", "PUT", "DELETE"])
 def hoot_detail(request, hoot_id):
+    # use this so if there no match route appear error
+    hoot = get_object_or_404(Hoot, pk=hoot_id)
+
+    if request.method == "GET":
+        serializer = HootSerializer(hoot)
+        return Response(serializer.data)
 
 
 
