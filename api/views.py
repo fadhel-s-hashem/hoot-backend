@@ -133,6 +133,20 @@ def comment_create(request, hoot_id):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(["PUT", "DELETE"])
+def comment_detail(request, hoot_id, comment_id):
+    comment = get_object_or_404(comment, pk=comment_id, hoot_id=hoot_id)
+
+    # check if it same user 
+    if comment.author != request.user:
+        return Response(
+            {"err": "You can only change your own comments."},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
+    
+
+
 
 
 
