@@ -122,7 +122,16 @@ def hoot_detail(request, hoot_id):
     return Response({"message": "Hoot deleted.", "_id": deleted_id})
 
 
+@api_view(["POST"])
+def comment_create(request, hoot_id):
+    hoot = get_object_or_404(Hoot, pk=hoot_id)
+    serializer = CommentSerializer(data=request.data)
 
+    if serializer.is_valid():
+        serializer.save(author= request.user, hoot=hoot)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
