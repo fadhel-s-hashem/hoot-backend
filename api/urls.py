@@ -1,0 +1,12 @@
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('auth/sign-up' , views.sign_up, name="sign-up"),
+    path('auth/sign-in' , views.sign_in, name="sign-ip"),
+    path("users", views.user_list, name="user-list"),
+    path('hoots', views.hoot_list_create, name="hoot-list-create"),
+    path('hoots/<int:hoot_id>', views.hoot_detail, name="hoot-detail"),
+
+]
