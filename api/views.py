@@ -144,7 +144,14 @@ def comment_detail(request, hoot_id, comment_id):
             status=status.HTTP_403_FORBIDDEN,
         )
 
-    
+    if request.method == "PUT":
+        serializer = CommentSerializer(comment, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
