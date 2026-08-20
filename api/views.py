@@ -8,8 +8,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import get_object_or_404
 
 
-from .models import Hoot
-from .serializers import UserSerializer, HootSerializer
+from .models import Hoot, Comment
+from .serializers import UserSerializer, HootSerializer, CommentSerializer
 
 # ceat token
 def create_acces_token(user):
