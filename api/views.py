@@ -117,6 +117,10 @@ def hoot_detail(request, hoot_id):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    deleted_id = str(hoot.id)
+    hoot.delete()
+    return Response({"message": "Hoot deleted.", "_id": deleted_id})
+
 
 
 
