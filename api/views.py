@@ -102,6 +102,21 @@ def hoot_detail(request, hoot_id):
         serializer = HootSerializer(hoot)
         return Response(serializer.data)
 
+    if hoot.author != request.user:
+        return Response(
+            {"err": "You can only change your own hoots."},
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
+    if request.method == "PUT":
+        serializer = HootSerializer(hoot, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 
