@@ -125,3 +125,6 @@ def hoot_detail(request, hoot_id):
 
 
 
+
+
+
